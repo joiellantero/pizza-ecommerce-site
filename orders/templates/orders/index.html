@@ -1,0 +1,204 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+  <title>PizzaStore</title>
+{% endblock %}
+
+{% block modal_template %}
+  <script id="modal-template" type="text/x-handlebars-template">
+    {% include "orders/modal.html" %}
+  </script>
+{% endblock %}
+
+{% block maintitle %}
+{% endblock %}
+
+{% block content %}
+  <!-- Place modal window here -->
+  <div id="modal-placeholder"></div>
+
+  <!-- Pizzas -->
+  <div class="project-group text-center">
+    <h2> PIZZA </h2>
+  </div>
+  <div class="row mb-5">
+    <!-- display pizzas -->
+    <div class="arrange-cards">
+      {% for pizza in pizzas %}
+        <!-- Card -->
+        <div class="card menu-card" style="width: 250px;" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
+          <!-- Card image -->
+          <div class="auto-resize-landscape">
+              <img class="card-img-top" src="{{ pizza.image.url }}" alt="{{ pizza.name }}" title="{{ pizza.name }}">
+          </div>
+
+          <!-- Card content -->
+          {% if user.is_authenticated %}
+            <div class="card-body">
+              <h4 class="card-title">{{ pizza.name }}</h4>
+              <p class="card-text">{{ pizza.description }}</p>
+              <a type="button" class="btn #f44336 red add-to-order" data-toggle="modal" data-target="#modalProduct" data-product-class="PizzaName" data-product-name="{{ pizza.name }}" data-product-id={{ pizza.pk }}>Order</a>
+            </div>
+          {% else %}
+            <div class="card-body">
+              <h4 class="card-title">{{ pizza.name }}</h4>
+              <p class="card-text">{{ pizza.description }}</p>
+            </div>
+          {% endif %}
+        </div>
+      {% empty %}
+          <div class="centerize">
+            <p>Oh no! We ran out of ingredients to make our delicious pizza.</p>
+          </div>
+      {% endfor %}
+    </div>
+  </div>
+
+
+
+
+  <div class="horizontal-scroll-container">
+    <h3 class="centerize mt-5 mb-4 menu-header">SUB</h3>
+
+    <div class="full hide-scroll">
+       <ul class="hs">
+            <!-- display subs -->
+            {% for sub in subs %}
+            <!-- Card -->
+            <div class="card menu-card" style="width: 250px;" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
+
+                <!-- Card image -->
+                <img class="card-img-top" src="{{ sub.image.url }}" alt="{{ sub.name }}" title="{{ sub.name }}">
+
+                <!-- Card content -->
+                {% if user.is_authenticated %}
+                  <div class="card-body">
+                    <h4 class="card-title">{{ sub.name }}</h4>
+                    <p class="card-text">{{ sub.description }}</p>
+                    <a type="button" class="btn #f44336 red add-to-order" data-toggle="modal" data-target="#modalProduct" data-product-class="Sub" data-product-name="{{ sub.name }}" data-product-id={{ sub.pk }}>Order</a>
+                  </div>
+                {% else %}
+                  <div class="card-body">
+                    <h4 class="card-title">{{ sub.name }}</h4>
+                    <p class="card-text">{{ sub.description }}</p>
+                  </div>
+                {% endif %}
+
+            </div>
+            {% empty %}
+                <div class="centerize">
+                    <p>Oh no! We ran out of ingredients to make our delicious subs.</p>
+                </div>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+<h3 class="centerize mt-5 mb-4 menu-header">PASTA</h3>
+
+<!-- display pastas -->
+<div class="arrange-cards mb-5">
+    {% for pasta in pastas %}
+    <!-- Card -->
+    <div class="card menu-card" style="width: 250px;" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
+
+        <!-- Card image -->
+        <img class="card-img-top" src="{{ pasta.image.url }}" alt="{{ pasta.name }}" title="{{ pasta.name }}">
+
+        <!-- Card content -->
+        {% if user.is_authenticated %}
+          <div class="card-body">
+            <h4 class="card-title">{{ pasta.name }}</h4>
+            <p class="card-text">{{ pasta.description }}</p>
+            <a type="button" class="btn #f44336 red add-to-order" data-toggle="modal" data-target="#modalProduct" data-product-class="Pasta" data-product-name="{{ pasta.name }}" data-product-id={{ pasta.pk }}>Order</a>
+          </div>
+        {% else %}
+          <div class="card-body">
+            <h4 class="card-title">{{ pasta.name }}</h4>
+            <p class="card-text">{{ pasta.description }}</p>
+          </div>
+        {% endif %}
+
+    </div>
+    {% empty %}
+      <div class="centerize">
+        <p>Oh no! We ran out of ingredients to make our delicious pasta.</p>
+      </div>
+    {% endfor %}
+</div>
+
+ 
+
+
+<h3 class="centerize mt-5 mb-4 menu-header">SALAD</h3>
+
+<!-- display salads -->
+<div class="arrange-cards mb-5">
+    {% for salad in salads %}
+    <!-- Card -->
+    <div class="card menu-card" style="width: 250px;" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
+
+        <!-- Card image -->
+        <img class="card-img-top" src="{{ salad.image.url }}" alt="{{ salad.name }}" title="{{ salad.name }}">
+
+        <!-- Card content -->
+        {% if user.is_authenticated %}
+            <div class="card-body">
+                <h4 class="card-title">{{ salad.name }}</h4>
+                <p class="card-text">{{ salad.description }}</p>
+                <a type="button" class="btn #f44336 red add-to-order" data-toggle="modal" data-target="#modalProduct" data-product-class="Salad" data-product-name="{{ salad.name }}" data-product-id={{ salad.pk }}>Order</a>
+            </div>
+        {% else %}
+        <div class="card-body">
+            <h4 class="card-title">{{ salad.name }}</h4>
+            <p class="card-text">{{ salad.description }}</p>
+        </div>
+        {% endif %}
+
+    </div>
+    {% empty %}
+        <div class="centerize">
+            <p>Oh no! We ran out of ingredients to make our delicious salad.</p>
+        </div>
+    {% endfor %}
+</div>
+
+
+
+<div class="horizontal-scroll-container">
+  <h3 class="centerize mt-5 mb-4 menu-header">DINNER PLATTERS</h3>
+
+  <div class="full hide-scroll">
+    <ul class="hs">
+      {% for dinner_platter in dinner_platters %}
+          <!-- Card -->
+          <div class="card menu-card" style="width: 250px;" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true">
+              <!-- Card image -->
+              <img class="card-img-top" src="{{ dinner_platter.image.url }}" alt="{{ dinner_platter.name }}" title="{{ dinner_platter.name }}">
+              <!-- Card content -->
+              {% if user.is_authenticated %}
+                <div class="card-body">
+                  <h4 class="card-title">{{ dinner_platter.name }}</h4>
+                  <p class="card-text">{{ dinner_platter.description }}</p>
+                  <a type="button" class="btn #f44336 red add-to-order" data-toggle="modal" data-target="#modalProduct" data-product-class="DinnerPlatterName" data-product-name="{{ dinner_platter.name }}" data-product-id={{ dinner_platter.pk }}>Order</a>
+                </div>
+              {% else %}
+                <div class="card-body">
+                  <h4 class="card-title">{{ dinner_platter.name }}</h4>
+                  <p class="card-text">{{ dinner_platter.description }}</p>
+                </div>
+              {% endif %}
+          </div>
+      {% empty %}
+          <div class="centerize">
+              <p>Oh no! We ran out of ingredients to make our delicious dinner platters.</p>
+          </div>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

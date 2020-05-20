@@ -1,0 +1,54 @@
+#brand-logo {
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Rock Salt', cursive; }
+
+footer p {
+  margin: 1em auto;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em; }
+
+#side-nav {
+  margin-top: 2em; }
+
+#container-main {
+  margin-top: 3.5em;
+  margin-bottom: 3.5em; }
+
+#order-price {
+  font-size: 1em; }
+
+#greeting {
+  margin-top: 2em; }
+
+#order-buttons {
+  margin: 2em auto; }
+
+.card-deck .card {
+  margin-bottom: 1em; }
+  .card-deck .card .card-img-top {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.5em; }
+
+@keyframes hide-tr {
+  0% {
+    opacity: 1;
+    height: 100%;
+    line-height: 100%; }
+  75% {
+    opacity: 0;
+    height: 100%;
+    line-height: 100%; }
+  100% {
+    opacity: 0;
+    height: 0px;
+    line-height: 0px; } }
+.order-item {
+  animation-name: hide-tr;
+  animation-duration: 0.75s;
+  animation-fill-mode: forwards;
+  animation-play-state: paused; }
+
+/*# sourceMappingURL=style.css.map */

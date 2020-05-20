@@ -1,0 +1,214 @@
+{% extends "orders/base.html" %}
+
+{% load orders.get_class %}
+
+{% block title %}
+{% endblock %}
+
+{% block modal_template %}
+{% endblock %}
+
+{% block maintitle %}
+  Cart
+{% endblock %}
+
+{% block content %}
+  <div style="width: 80%; margin: 80px auto;">
+  {% if order_exists %}
+    {% if pizzas %}
+      <h3>Pizzas</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Size</th>
+            <th scope="col">Toppings</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            {% if buttons %}
+              <th scope="col" class="text-center">Action</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for pizza in pizzas %}
+            <tr class="order-item">
+              <td scope="row">{{ forloop.counter }}</td>
+              <td>{{ pizza.pizza.name }}</td>
+              <td>{{ pizza.pizza.size }}</td>
+              <td>{{ pizza.get_toppings }}</td>
+              <td>{{ pizza.quantity }}</td>
+              <td>{{ pizza.get_price }}</td>
+              {% if buttons %}
+                <td class="text-center">
+                  <button type="button" name="button" class="btn btn-danger btn-sm remove-item" data-order-class="{{ pizza|get_class }}" data-order-id="{{ pizza.id }}">
+                    Remove
+                  </button>
+                </td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+    {% if subs %}
+      <h3>Subs</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Size</th>
+            <th scope="col">Addons</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            {% if buttons %}
+              <th scope="col" class="text-center">Action</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for sub in subs %}
+            <tr class="order-item">
+              <td scope="row">{{ forloop.counter }}</td>
+              <td>{{ sub.sub.name }}</td>
+              <td>{{ sub.sub.size }}</td>
+              <td>{{ sub.get_addons }}</td>
+              <td>{{ sub.quantity }}</td>
+              <td>{{ sub.get_price }}</td>
+              {% if buttons %}
+                <td class="text-center">
+                  <button type="button" name="button" class="btn btn-danger btn-sm remove-item" data-order-class="{{ sub|get_class }}" data-order-id="{{ sub.id }}">
+                    Remove
+                  </button>
+                </td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+    {% if pastas %}
+      <h3>Pastas</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            {% if buttons %}
+              <th scope="col" class="text-center">Action</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for pasta in pastas %}
+            <tr class="order-item">
+              <td scope="row">{{ forloop.counter }}</td>
+              <td>{{ pasta.pasta.name }}</td>
+              <td>{{ pasta.quantity }}</td>
+              <td>{{ pasta.get_price }}</td>
+              {% if buttons %}
+                <td class="text-center">
+                  <button type="button" name="button" class="btn btn-danger btn-sm remove-item" data-order-class="{{ pasta|get_class }}" data-order-id="{{ pasta.id }}">
+                    Remove
+                  </button>
+                </td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+    {% if salads %}
+      <h3>Salads</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            {% if buttons %}
+              <th scope="col" class="text-center">Action</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for salad in salads %}
+            <tr class="order-item">
+              <td scope="row">{{ forloop.counter }}</td>
+              <td>{{ salad.salad.name }}</td>
+              <td>{{ salad.quantity }}</td>
+              <td>{{ salad.get_price }}</td>
+              {% if buttons %}
+                <td class="text-center">
+                  <button type="button" name="button" class="btn btn-danger btn-sm remove-item" data-order-class="{{ salad|get_class }}" data-order-id="{{ salad.id }}">
+                    Remove
+                  </button>
+                </td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+    {% if dinner_platters %}
+      <h3>Dinner Platters</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Size</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            {% if buttons %}
+              <th scope="col" class="text-center">Action</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for dinner_platter in dinner_platters %}
+            <tr class="order-item">
+              <td scope="row">{{ forloop.counter }}</td>
+              <td>{{ dinner_platter.dinner_platter.name }}</td>
+              <td>{{ dinner_platter.dinner_platter.size }}</td>
+              <td>{{ dinner_platter.quantity }}</td>
+              <td>{{ dinner_platter.get_price }}</td>
+              {% if buttons %}
+                <td class="text-center">
+                  <button type="button" name="button" class="btn btn-danger btn-sm btn-sm btn-sm remove-item" data-order-class="{{ dinner_platter|get_class }}" data-order-id="{{ dinner_platter.id }}">
+                    Remove
+                  </button>
+                </td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+    <div class="total-price">
+      <h4 class="text-right">Total: <strong id="overall-price">${{ overall_price }}</strong></h4>
+    </div>
+
+    {% if buttons %}
+    <div class="row" id="order-buttons">
+      <div class="ml-auto">
+        <button class="btn btn-amber" id="btn-confirm-order" type="button" name="button">Checkout</button> 
+        <button class="btn btn-light" id="btn-cancel-order" type="button" name="button">Cancel</button>
+      </div>
+    </div>
+    {% endif %}
+  {% else %}
+    <strong class="centerize">Order does not exist or not found</strong>
+  {% endif %}
+</div>
+{% endblock %}

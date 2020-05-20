@@ -1,0 +1,65 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block modal_template %}
+{% endblock %}
+
+{% block maintitle %}
+  Account
+{% endblock %}
+
+{% block content %}
+  <div class="centerize mt-5 ml-5 mr-5">
+    <div class="row">
+
+        <div class="col-4">
+            <div class="card" data-aos="fade-right">
+                <div class="card-header">
+                    {{ user.username }}
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">{{ user.first_name }} {{ user.last_name }}</li>
+                  <li class="list-group-item">{{ user.email }}</li>
+                  <a class="list-group-item" href="{% url 'logout' %}" style="color:#f44336;"> Logout </a>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-8">
+          <h4 class="mb-5">Order History</h4>
+          {% if orders %}
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Order ID</th>
+                  <th>Date Purchased</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for order in orders %}
+                  <tr>
+                    <td scope="row"><a href="{% url 'order' order.id %}">{{ forloop.counter }}</a></td>
+                    <td>{{ order.created }}</td>
+                    <td>{{ order.get_order_price }}</td>
+                    <td>
+                      {% if order.order_completed %}
+                        Completed
+                      {% else %}
+                        Processing
+                      {% endif %}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <strong>There is no orders</strong>
+          {% endif %}
+        </div>
+      </div>
+  </div>
+{% endblock %}

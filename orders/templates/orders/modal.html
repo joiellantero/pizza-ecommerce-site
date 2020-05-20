@@ -1,0 +1,82 @@
+<!-- Modal -->
+{% verbatim %}
+  <div class="modal fade" id="modalProduct" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ product_name }} {{ product_class_hr }}</h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="add-to-cart-form">
+            {% endverbatim %}{% csrf_token %}{% verbatim %}
+            <!-- Size -->
+            {{#if size}} 
+              <div class="form-group">
+                <label for="product-size">Select size</label>
+                <select class="form-control" id="product-size" name="size">
+                  {{#each size_values}}
+                    {{#if @first }}
+                      <option value="{{ size_value }}" selected>{{size_name}}</option>
+                    {{else}}
+                      <option value="{{ size_value }}">{{size_name}}</option>
+                    {{/if}}
+                  {{/each}}
+                </select>
+              </div>
+            {{/if}}
+            <!-- SubAddons -->
+            {{#if subaddons}}
+              <div class="form-group">
+                <label for="sub-addons">Select addons</label>
+                <select class="form-control" id="sub-addons" name="subaddons" multiple>
+                  {{#each subaddons_values}}
+                    <option value="{{ subaddon_value }}">{{subaddon_name}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            {{/if}}
+            <!-- Toppings -->
+            {{#if toppings}}
+              <!-- Count -->
+              <div class="form-group">
+                <label for="toppings-count">Select toppings count</label>
+                <select class="form-control" id="toppings-count" name="toppings_count">
+                  {{#each toppings_count}}
+                    {{#if @first }}
+                      <option value="{{ this }}" selected>{{this}}</option>
+                    {{else}}
+                      <option value="{{ this }}">{{this}}</option>
+                    {{/if}}
+                  {{/each}}
+                </select>
+              </div>
+              <!-- Toppings list -->
+              <div class="form-group">
+                <label for="toppings-list">Select toppings</label>
+                <select class="form-control" id="toppings-list" name="toppings" multiple>
+                  {{#each toppings_list}}
+                    <option value="{{ topping_value }}">{{topping_name}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            {{/if}}
+            <!-- Quantity -->
+            <div class="form-group">
+              <label for="product-quantity">Enter the quantity:</label>
+              <input class="form-control" id="product-quantity" type="number" name="quantity" min="1" max="10" value="1">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+          <button id="add-to-cart" type="button" class="btn #f44336 red text-white">
+            Add to cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endverbatim %}
