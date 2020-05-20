@@ -2,7 +2,7 @@
 
 # Project 3
 
-An ecommerce site based on Pinnochio’s Pizza & Subs.
+An ecommerce site based on Pinnochio’s Pizza & Subs. This is a project for CS50's Web Programming with Python and JavaScript course
 
 ## Usage
 
